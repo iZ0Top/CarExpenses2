@@ -2,11 +2,12 @@ package com.alex.carexpenses.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import java.io.Serializable
 
 @Entity (tableName = "expense")
 data class Expense(
     @PrimaryKey (autoGenerate = true)
-    val id: Int,
+    val id: Int = 1,
     val date: String,
     val name: String,
     val description: String,
@@ -14,4 +15,4 @@ data class Expense(
     val type: Int,
     val quantity: Int,
     val prise: Double
-)
+): Serializable

@@ -8,6 +8,7 @@ import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import com.alex.carexpenses.databinding.ActivityMainBinding
+import com.alex.carexpenses.utils.APP_ACTIVITY
 
 class MainActivity : AppCompatActivity() {
 
@@ -26,9 +27,9 @@ class MainActivity : AppCompatActivity() {
 
         toolbar = binding.toolbar
         setSupportActionBar(toolbar)
-
         title = "Car Expense 2"
 
+        APP_ACTIVITY = this
     }
 
     override fun onStart() {

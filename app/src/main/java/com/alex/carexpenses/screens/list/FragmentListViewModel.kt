@@ -1,4 +1,7 @@
 package com.alex.carexpenses.screens.list
 
-class FragmentListViewModel {
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
+
+class FragmentListViewModel(application: Application): AndroidViewModel(application) {
 }
