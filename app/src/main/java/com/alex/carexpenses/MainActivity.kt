@@ -21,11 +21,13 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        navController = findNavController(R.id.nav_host_fragment_container)
+        navController = Navigation.findNavController(this, R.id.nav_host_fragment_container)
+        //navController = findNavController(R.id.nav_host_fragment_container)
 
         toolbar = binding.toolbar
         setSupportActionBar(toolbar)
 
+        title = "Car Expense 2"
 
     }
 
