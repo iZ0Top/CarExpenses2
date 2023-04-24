@@ -4,7 +4,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import java.io.Serializable
 
-@Entity (tableName = "expense")
+@Entity (tableName = "expenses_table")
 data class Expense(
     @PrimaryKey (autoGenerate = true)
     val id: Int = 1,

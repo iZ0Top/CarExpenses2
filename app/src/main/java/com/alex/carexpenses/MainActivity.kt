@@ -7,8 +7,11 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
+import com.alex.carexpenses.database.RoomDatabase
+import com.alex.carexpenses.database.RoomRepository
 import com.alex.carexpenses.databinding.ActivityMainBinding
 import com.alex.carexpenses.utils.APP_ACTIVITY
+import com.alex.carexpenses.utils.REPOSITORY
 
 class MainActivity : AppCompatActivity() {
 
@@ -30,12 +33,12 @@ class MainActivity : AppCompatActivity() {
         title = "Car Expense 2"
 
         APP_ACTIVITY = this
+
+        initDatabase()
     }
 
     override fun onStart() {
         super.onStart()
-
-
 
     }
 
@@ -51,7 +54,8 @@ class MainActivity : AppCompatActivity() {
         super.onStop()
     }
 
-
-
-
+    private fun initDatabase(){
+        val dao = RoomDatabase.getInstance(this).getRoomDao()
+        REPOSITORY = RoomRepository(dao)
+    }
 }
