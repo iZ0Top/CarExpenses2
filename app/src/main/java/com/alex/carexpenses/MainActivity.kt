@@ -2,12 +2,12 @@ package com.alex.carexpenses
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toolbar
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import androidx.navigation.Navigation.findNavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
-import com.alex.carexpenses.database.RoomDatabase
+import com.alex.carexpenses.database.RoomDB
 import com.alex.carexpenses.database.RoomRepository
 import com.alex.carexpenses.databinding.ActivityMainBinding
 import com.alex.carexpenses.utils.APP_ACTIVITY
@@ -25,8 +25,8 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        navController = Navigation.findNavController(this, R.id.nav_host_fragment_container)
-        //navController = findNavController(R.id.nav_host_fragment_container)
+        navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment_container) as NavHostFragment
+        navController = navHostFragment.navController
 
         toolbar = binding.toolbar
         setSupportActionBar(toolbar)
@@ -55,7 +55,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initDatabase(){
-        val dao = RoomDatabase.getInstance(this).getRoomDao()
+        val dao = RoomDB.getInstance(this).getRoomDao()
         REPOSITORY = RoomRepository(dao)
     }
 }
