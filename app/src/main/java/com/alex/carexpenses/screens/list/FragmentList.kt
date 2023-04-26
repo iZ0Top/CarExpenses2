@@ -12,6 +12,7 @@ import com.alex.carexpenses.R
 import com.alex.carexpenses.adapters.Adapter
 import com.alex.carexpenses.databinding.FragmentListBinding
 import com.alex.carexpenses.model.Expense
+import com.alex.carexpenses.utils.APP_ACTIVITY
 
 class FragmentList : Fragment() {
 
@@ -44,6 +45,10 @@ class FragmentList : Fragment() {
 
         mObserver = Observer {
             mAdapter.setData(it)
+        }
+
+        binding.fab.setOnClickListener {
+            APP_ACTIVITY.navController.navigate(R.id.action_fragmentList_to_fragmentAdd)
         }
     }
 
