@@ -9,9 +9,10 @@ data class Expense(
     @PrimaryKey (autoGenerate = true)
     val id: Int = 0,
     val date: String = "",
-    val name: String = "",
     val description: String = "",
+    val detail: String = "",
     val partNumber: String = "",
+    val odometer: Int = 0,
     val type: Int = 0,
     val quantity: Int = 0,
     val prise: Double = 0.0

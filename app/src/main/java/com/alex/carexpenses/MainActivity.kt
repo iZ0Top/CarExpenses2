@@ -2,6 +2,7 @@ package com.alex.carexpenses
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.Navigation.findNavController
@@ -11,11 +12,14 @@ import com.alex.carexpenses.database.RoomDB
 import com.alex.carexpenses.database.RoomRepository
 import com.alex.carexpenses.databinding.ActivityMainBinding
 import com.alex.carexpenses.utils.APP_ACTIVITY
+import com.alex.carexpenses.utils.LOG_TAG
 import com.alex.carexpenses.utils.REPOSITORY
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityMainBinding
+    private var _binding: ActivityMainBinding? = null
+    private val binding get() = _binding!!
+
     private lateinit var toolbar: androidx.appcompat.widget.Toolbar
     private lateinit var navHostFragment: NavHostFragment
     lateinit var navController: NavController
@@ -23,8 +27,17 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
+        _binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        Log.d(LOG_TAG, "MainActivity: onCreate")
+
+        APP_ACTIVITY = this
+
+    }
+
+    override fun onStart() {
+        super.onStart()
+        Log.d(LOG_TAG, "MainActivity: onStart")
 
         navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment_container) as NavHostFragment
         navController = navHostFragment.navController
@@ -32,14 +45,6 @@ class MainActivity : AppCompatActivity() {
         toolbar = binding.toolbar
         setSupportActionBar(toolbar)
         title = "Car Expense 2"
-
-        APP_ACTIVITY = this
-
-        initDatabase()
-    }
-
-    override fun onStart() {
-        super.onStart()
 
     }
 
@@ -55,8 +60,8 @@ class MainActivity : AppCompatActivity() {
         super.onStop()
     }
 
-    private fun initDatabase(){
-        val dao = RoomDB.getInstance(this).getRoomDao()
-        REPOSITORY = RoomRepository(dao)
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 }
